@@ -1,0 +1,64 @@
+
+version: "3"
+volumes:
+  db-store:
+
+x-dev-base: &dev-base
+  build: .
+  environment:
+    DATABASE_URL: mysql://docker:docker@mysql:3306/nest_next_sample
+    SERVER_APOLLO_URI: http://api:3300
+    PUBLIC_APOLLO_URI: http://localhost:3300
+    TZ: Asia/Tokyo
+  volumes:
+    - .:/app
+    - /app/node_modules
+    - /app/packages/api/node_modules
+    - /app/packages/web/node_modules
+    - /app/packages/githubapp/node_modules
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    command: mysqld
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: nest_next_sample
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 4306:3306
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/init:/docker-entrypoint-initdb.d
+
+  backend:
+    << : *dev-base
+    working_dir: /app/packages/api
+    tty: true
+    depends_on:
+      - mysql
+    ports:
+      - "3300:3300"
+
+
+  frontend:
+    << : *dev-base
+    working_dir: /app/packages/web
+    tty: true
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+  githubapp:
+    << : *dev-base
+    working_dir: /app/packages/githubapp
+    tty: true
+    depends_on:
+      - backend
+    ports:
+      - "3500:3500"

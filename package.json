@@ -1,0 +1,40 @@
+{
+  "name": "testiroiro",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "api": "yarn workspace api",
+    "web": "yarn workspace web",
+    "githubapp": "yarn workspace githubapp",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:api": "eslint ./packages/api",
+    "lint:web": "eslint ./packages/web",
+    "lint:githubapp": "eslint ./packages/githubapp",
+    "codegen": "yarn web codegen && yarn eslint ./packages/web/graphql --fix"
+  },
+  "devDependencies": {
+    "@emotion/eslint-plugin": "^11.10.0",
+    "@types/node": "^18.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-emotion": "^11.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
