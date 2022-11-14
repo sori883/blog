@@ -1,0 +1,26 @@
+query articleBySlug($slug: String!) {
+  articleBySlug(slug: $slug) {
+    id
+    title
+    entry
+    slug
+    published
+    createdAt
+    updatedAt
+    image {
+      id
+      name
+      path
+      createdAt
+      updatedAt
+    }
+    tagsOnArticles {
+      tag {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}

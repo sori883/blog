@@ -1,0 +1,8 @@
+query tags {
+  tags {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}

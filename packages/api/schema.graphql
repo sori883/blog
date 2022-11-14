@@ -1,0 +1,111 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ImageModel {
+  id: ID!
+  article: [ArticleModel!]!
+  name: String!
+  path: String!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type TagsOnArticles {
+  articleId: Int!
+  tagId: Int!
+  article: ArticleModel!
+  tag: TagModel!
+}
+
+type ArticleModel {
+  id: ID!
+  title: String!
+  entry: String!
+  slug: String!
+  published: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+  image: ImageModel!
+  tagsOnArticles: [TagsOnArticles!]!
+}
+
+type TagModel {
+  id: ID!
+  name: String!
+  createdAt: Date!
+  updatedAt: Date!
+  article: ArticleModel!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  article(id: Int!): ArticleModel
+  articleBySlug(slug: String!): ArticleModel
+  articles(pagination: PaginationArtricleInput!): [ArticleModel!]!
+  articleCount: Int!
+  tag(id: Int!): TagModel
+  tags: [TagModel!]!
+  tagsByIds(ids: [Int!]!): [TagModel!]!
+  image(id: Int!): ImageModel
+  images: [ImageModel!]!
+  imagesByIds(ids: [Int!]!): [ImageModel!]!
+}
+
+input PaginationArtricleInput {
+  skip: Int = 0
+  take: Int = 25
+}
+
+type Mutation {
+  saveArticle(article: AddArticleInput!): ArticleModel!
+  updateArticle(article: UpdateArticleInput!): ArticleModel!
+  deleteArticle(id: Int!): ArticleModel
+  saveTag(Tag: AddTagInput!): TagModel!
+  updateTag(Tag: UpdateTagInput!): TagModel!
+  deleteTag(id: Int!): TagModel
+  saveImage(image: AddImageInput!): ImageModel!
+  updateImage(image: UpdateImageInput!): ImageModel!
+  deleteImage(id: Int!): ImageModel
+}
+
+input AddArticleInput {
+  title: String!
+  entry: String!
+  slug: String!
+  published: Boolean!
+  imageId: Int!
+  tagIds: [Int!]!
+}
+
+input UpdateArticleInput {
+  id: ID!
+  title: String!
+  entry: String!
+  slug: String!
+  published: Boolean!
+  imageId: Int!
+  tagIds: [Int!]!
+}
+
+input AddTagInput {
+  name: String!
+}
+
+input UpdateTagInput {
+  id: ID!
+  name: String!
+}
+
+input AddImageInput {
+  name: String!
+  path: String!
+}
+
+input UpdateImageInput {
+  id: ID!
+  name: String!
+  path: String!
+}

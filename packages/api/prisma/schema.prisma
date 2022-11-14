@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+}
+
+model Article {
+  id Int @default(autoincrement()) @id
+  title String @db.VarChar(255)
+  entry String
+  slug String
+  published Boolean? @default(false) @db.TinyInt
+  tagsOnArticles TagsOnArticles[]
+  imageId Int
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
+  image Image @relation(fields: [imageId], references: [id])
+  
+  @@unique([slug])
+}
+
+model Tag {
+  id Int @default(autoincrement()) @id
+  name String @db.VarChar(255)
+  tagsOnArticles TagsOnArticles[]
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
+
+  @@unique([name])
+}
+
+model Image {
+  id Int @default(autoincrement()) @id
+  name String @db.VarChar(255)
+  path String @db.VarChar(255)
+  article Article[]
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
+
+  @@unique([path])
+}
+
+model TagsOnArticles {
+  articleId Int
+  tagId Int
+  tag Tag @relation(fields: [tagId], references: [id])
+  article Article @relation(fields: [articleId], references: [id])
+
+  @@id([articleId, tagId])
+  @@index([articleId], name: "TagsOnArticles.articleId_index")
+  @@index([tagId], name: "TagsOnArticles.tagId_index")
+}
