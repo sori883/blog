@@ -50,22 +50,67 @@ export class ArticleService {
     });
   }
 
-  async save({ tagIds, ...payload }: AddArticleInput) {
+  async save({ tagNames, imagePath,  ...payload }: AddArticleInput) {
+    // イメージ取得
+    const image = await this.prisma.image.findUnique({
+      where: { path: imagePath }
+    });
+    
+    // タグ取得しつつ作る
+    const tagUpsertMany = tagNames.map((tagName) => (
+      this.prisma.tag.upsert({
+        where: {
+          name: tagName,
+        },
+        update: {},
+        create: {
+          name: tagName
+        },
+      })
+    ));
+
+    // 作成したタグたち
+    const tags = await this.prisma.$transaction([...tagUpsertMany]);
+
     return await this.prisma.article.create({
       data: {
         ...payload,
+        imageId: image.id,
         tagsOnArticles: {
-          createMany: { data: tagIds.map((tagId) => ({ tagId })) },
+          createMany: { data: tags.map((tag) => ({ tagId: tag.id })) },
         },
       },
     });
   }
 
-  async update({ slug, tagIds, ...data }: UpdateArticleInput) {
+  async update({ tagNames, imagePath, slug, ...data }: UpdateArticleInput) {
+    // イメージ取得
+    const image = await this.prisma.image.findUnique({
+      where: { path: imagePath }
+    });
+    
+    // タグ取得しつつ作る
+    const tagUpsertMany = tagNames.map((tagName) => (
+      this.prisma.tag.upsert({
+        where: {
+          name: tagName,
+        },
+        update: {},
+        create: {
+          name: tagName
+        },
+      })
+    ));
+
+    // 作成したタグたち
+    const tags = await this.prisma.$transaction([...tagUpsertMany]);
+    
     return await this.prisma.article.update({ where: { slug: slug }, data: {
       ...data,
+      slug: slug,
+      imageId: image.id,
       tagsOnArticles: {
-        createMany: { data: tagIds.map((tagId) => ({ tagId })) },
+        createMany: { data: tags.map((tag) => ({ tagId: tag.id })) },
       },
     }, });
   }

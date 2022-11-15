@@ -36,7 +36,7 @@ export class ArticleResolver {
 
   @Mutation((returns) => ArticleModel)
   async updateArticle(@Args('article') article: UpdateArticleInput) {
-    return await this.articleService.save(article);
+    return await this.articleService.update(article);
   }
 
   @Mutation((returns) => ArticleModel, { nullable: true })

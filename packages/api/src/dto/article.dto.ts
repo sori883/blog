@@ -24,11 +24,11 @@ export class AddArticleInput {
     slug!: string;
   @Field()
     published!: boolean;
-  @Field((type) => Int)
-    imageId!: number;
+  @Field((type) => String)
+    imagePath!: string;
 
-  @Field((type) => [Int])
-    tagIds!: number[];
+  @Field((type) => [String])
+    tagNames!: string[];
 }
 
 @InputType()
@@ -41,9 +41,9 @@ export class UpdateArticleInput {
     slug!: string;
   @Field()
     published!: boolean;
-  @Field((type) => Int)
-    imageId!: number;
+  @Field((type) => String)
+    imagePath!: string;
 
-  @Field((type) => [Int])
-    tagIds!: number[];
+  @Field((type) => [String])
+    tagNames!: string[];
 }
