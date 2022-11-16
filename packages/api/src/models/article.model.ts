@@ -20,8 +20,8 @@ export class ArticleModel {
   @Field()
     updatedAt!: Date;
 
-  @Field((type) => ImageModel)
-    image!: ImageModel;
+  @Field((type) => ImageModel, {nullable:true})
+    image?: ImageModel;
 
   @Field((type) => [TagsOnArticles])
     tagsOnArticles!: TagsOnArticles[];

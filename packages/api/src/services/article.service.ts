@@ -52,9 +52,9 @@ export class ArticleService {
 
   async save({ tagNames, imagePath,  ...payload }: AddArticleInput) {
     // イメージ取得
-    const image = await this.prisma.image.findUnique({
+    const image = imagePath ? await this.prisma.image.findUnique({
       where: { path: imagePath }
-    });
+    }) : null;
     
     // タグ取得しつつ作る
     const tagUpsertMany = tagNames.map((tagName) => (
@@ -75,7 +75,7 @@ export class ArticleService {
     return await this.prisma.article.create({
       data: {
         ...payload,
-        imageId: image.id,
+        imageId: image ? image.id : null,
         tagsOnArticles: {
           createMany: { data: tags.map((tag) => ({ tagId: tag.id })) },
         },
@@ -85,9 +85,9 @@ export class ArticleService {
 
   async update({ tagNames, imagePath, slug, ...data }: UpdateArticleInput) {
     // イメージ取得
-    const image = await this.prisma.image.findUnique({
+    const image = imagePath ? await this.prisma.image.findUnique({
       where: { path: imagePath }
-    });
+    }) : null;
     
     // タグ取得しつつ作る
     const tagUpsertMany = tagNames.map((tagName) => (
@@ -108,8 +108,9 @@ export class ArticleService {
     return await this.prisma.article.update({ where: { slug: slug }, data: {
       ...data,
       slug: slug,
-      imageId: image.id,
+      imageId: image && image.id,
       tagsOnArticles: {
+        deleteMany: { articleId: ((await this.findBySlug(slug)).id) },
         createMany: { data: tags.map((tag) => ({ tagId: tag.id })) },
       },
     }, });

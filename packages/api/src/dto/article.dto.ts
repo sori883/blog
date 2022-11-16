@@ -24,7 +24,7 @@ export class AddArticleInput {
     slug!: string;
   @Field()
     published!: boolean;
-  @Field((type) => String)
+  @Field((type) => String, {nullable:true})
     imagePath!: string;
 
   @Field((type) => [String])
@@ -41,7 +41,7 @@ export class UpdateArticleInput {
     slug!: string;
   @Field()
     published!: boolean;
-  @Field((type) => String)
+  @Field((type) => String, {nullable:true})
     imagePath!: string;
 
   @Field((type) => [String])
