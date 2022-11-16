@@ -177,7 +177,7 @@ export = (app: Probot) => {
         variables: {article: mdMeta}
       });
       // フロントのONDEMAND ISR
-      await axios.get(`${process.env.REVALIDATE_URL}/${mdMeta.slug}`);
+      await axios.get(`${process.env.REVALIDATE_URL}${mdMeta.slug}`);
     });
 
   });
