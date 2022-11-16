@@ -1,6 +1,6 @@
 export type Meta = {
   title: string;
-  slug: string;
+  slug: string| null;
   published: boolean;
   imageId: number;
   tagIds: number[];
