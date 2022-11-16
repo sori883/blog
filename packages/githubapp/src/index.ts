@@ -143,6 +143,8 @@ export = (app: Probot) => {
         }`,
         variables: {article: mdMeta}
       });
+      // フロントのONDEMAND ISR
+      await axios.get(`${process.env.REVALIDATE_URL}/${mdMeta.slug}`);
     });
 
     // 記事取得(全部)
@@ -174,6 +176,8 @@ export = (app: Probot) => {
         }`,
         variables: {article: mdMeta}
       });
+      // フロントのONDEMAND ISR
+      await axios.get(`${process.env.REVALIDATE_URL}/${mdMeta.slug}`);
     });
 
   });
