@@ -8,6 +8,7 @@ import Link from 'next/link';
 import TagChip from 'components/elements/tagChip/tagChip';
 import { ArticlesQuery } from 'graphql/generated';
 import { pagesPath } from 'lib/$path';
+import { imageLoader } from 'lib/ImageLoader';
 import parseValue from 'lib/dataformat';
 
 type Props = {
@@ -20,14 +21,17 @@ export default function ArticleItem({ article }: Props): JSX.Element {
   return (
     <>
       <Card
-        sx={{ maxWidth: 400 }}
+        sx={{ maxWidth: 400, minWidth: 400}}
       >
-        <Link href={pagesPath._slug(article.slug).$url()}>
+        <Link href={pagesPath.posts._slug(article.slug).$url()}>
           <CardActionArea>
             <CardMedia
               component='img'
               height='140'
-              image='test.png' // TODO:指定はこれ{article.image.path}
+              image={imageLoader({
+                src: 'images/test/ss.43.jpg', 
+                width: 100
+              })} // TODO:指定はこれ{article.image.path}
               alt='green iguana'
             />
             <CardContent>

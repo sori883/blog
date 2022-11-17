@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage  } from 'next';
@@ -128,6 +129,7 @@ const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <TagChip
               tagsOnArticles={fallbackArticle.articleBySlug.tagsOnArticles}
             />
+            <Divider sx={{marginY: 2}} />
             <View
               markdown={body}
             />

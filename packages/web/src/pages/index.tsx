@@ -12,11 +12,11 @@ import { ArticlesDocument, ArticlesQuery, ArticlesQueryVariables } from 'graphql
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const defaultPage: number = context.query.page ? Number(context.query.page) : 0;
   // スキップ算出くん
-  const skipContents = defaultPage === 0 ? 0 : (defaultPage - 1) * 20;
+  const skipContents = defaultPage === 0 ? 0 : (defaultPage - 1) * 9;
   
   const { data } = await client.query<ArticlesQuery, ArticlesQueryVariables>({
     query: ArticlesDocument,
-    variables: {take: 20, skip: skipContents }
+    variables: {take: 9, skip: skipContents }
   });
 
   return {
