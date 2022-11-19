@@ -1,14 +1,12 @@
 import { CardActionArea } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 
 import TagChip from 'components/elements/tagChip/tagChip';
 import { ArticlesQuery } from 'graphql/generated';
 import { pagesPath } from 'lib/$path';
-import { imageLoader } from 'lib/ImageLoader';
 import parseValue from 'lib/dataformat';
 
 type Props = {
@@ -21,30 +19,25 @@ export default function ArticleItem({ article }: Props): JSX.Element {
   return (
     <>
       <Card
-        sx={{ maxWidth: 400, minWidth: 400}}
+        sx={{ maxWidth: 400, minWidth: {md: 400, xs: 350}, height: 230 }}
       >
         <Link href={pagesPath.posts._slug(article.slug).$url()}>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              height='140'
-              image={imageLoader({
-                src: 'images/test/ss.43.jpg', 
-                width: 100
-              })} // TODO:指定はこれ{article.image.path}
-              alt='green iguana'
-            />
-            <CardContent>
-              <Typography gutterBottom variant='h5' component='div'>
+          <CardActionArea
+            sx={{ width: '100%', height: '100%', display: 'flex', flexFlow: 'column'}}
+          >
+            <CardContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+              <Typography gutterBottom variant='h5' component='h5' sx={{ width: '100%', fontWeight: 700, verticalAlign: 'middle' }}>
                 { article.title }
               </Typography>
-              <Typography variant='body2' color='text.secondary'>
+            </CardContent>
+            <CardContent sx={{ width: '100%' }}>
+              <Typography variant='body2' color='text.secondary' component='div' sx={{ marginBottom: 1 }}>
                 <TagChip 
                   tagsOnArticles={article.tagsOnArticles}
                 />
               </Typography>
-              <Typography variant='body2' color='text.secondary'>
-                { parseValue(article.createdAt) }
+              <Typography variant='body2' color='text.secondary' component='div'>
+                投稿日：{ parseValue(article.createdAt) }
               </Typography>
             </CardContent>
           </CardActionArea>

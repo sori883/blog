@@ -47,7 +47,11 @@ export const getStaticProps: GetStaticProps = async ({
 
 const body = `
 # 第とる
-![犬](test.png)
+~~~js
+console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')
+~~~
+[Google](http://www.google.co.jp/)
+![犬](images/test/ss.43.jpg)
 ## タイトル1
 ***こんばんわ***
 * おはよう。
@@ -147,7 +151,8 @@ const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             borderRadius: 2,
             p: 2,
             position: 'sticky',
-            top: 50
+            top: 50,
+            display: { xs: 'none', md: 'flex' }
           }}>
             <Resume
               markdown={body}
