@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withTM = require("next-transpile-modules")(['react-syntax-highlighter']);
+
+const nextConfig =  {
   reactStrictMode: true,
   swcMinify: true,
   serverRuntimeConfig: {
@@ -13,8 +17,20 @@ const nextConfig = {
     FBAPP_ID: process.env.FBAPP_ID
   },
   images: {
-    domains: ['storage.googleapis.com'],
+    domains: ['storage.googleapis.com', 'storage.cloud.google.com'],
   },
+  compiler: {
+    emotion: true
+  }
 };
 
-module.exports = nextConfig;
+const buildConfig = _phase => {
+  const plugins = [withTM];
+  const config = plugins.reduce((acc, next) => next(acc), {
+    ...nextConfig
+  });
+  return config;
+};
+
+
+module.exports = buildConfig();
