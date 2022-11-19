@@ -4,11 +4,11 @@
 
 type ImageModel {
   id: ID!
-  article: [ArticleModel!]!
   name: String!
   path: String!
   createdAt: Date!
   updatedAt: Date!
+  article: [ArticleModel!]!
 }
 
 type TagsOnArticles {
@@ -26,7 +26,7 @@ type ArticleModel {
   published: Boolean!
   createdAt: Date!
   updatedAt: Date!
-  image: ImageModel!
+  image: ImageModel
   tagsOnArticles: [TagsOnArticles!]!
 }
 
@@ -76,18 +76,17 @@ input AddArticleInput {
   entry: String!
   slug: String!
   published: Boolean!
-  imageId: Int!
-  tagIds: [Int!]!
+  imagePath: String
+  tagNames: [String!]!
 }
 
 input UpdateArticleInput {
-  id: ID!
   title: String!
   entry: String!
   slug: String!
   published: Boolean!
-  imageId: Int!
-  tagIds: [Int!]!
+  imagePath: String
+  tagNames: [String!]!
 }
 
 input AddTagInput {
@@ -105,7 +104,6 @@ input AddImageInput {
 }
 
 input UpdateImageInput {
-  id: ID!
   name: String!
   path: String!
 }

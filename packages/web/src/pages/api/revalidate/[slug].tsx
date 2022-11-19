@@ -13,7 +13,7 @@ export default async function handler(
   } = req;
   let revalidated = false;
   try {
-    await res.revalidate(`/${slug}`);
+    await res.revalidate(`/posts/${slug}`);
     revalidated = true;
   } catch (err) {
     console.log(err);

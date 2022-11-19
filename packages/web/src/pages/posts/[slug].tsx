@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage  } from 'next';
@@ -44,68 +45,6 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
-const body = `
-# 第とる
-![犬](test.png)
-## タイトル1
-***こんばんわ***
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-## タイトル2
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-## タイトル3
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-## タイトル2
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-## タイトル3
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-## タイトル2
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-## タイトル3
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは`;
-
 const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   fallbackArticle
 }) => (
@@ -128,8 +67,9 @@ const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <TagChip
               tagsOnArticles={fallbackArticle.articleBySlug.tagsOnArticles}
             />
+            <Divider sx={{marginY: 2}} />
             <View
-              markdown={body}
+              markdown={fallbackArticle.articleBySlug.entry}
             />
           </ContentBox>
         </Grid>
@@ -145,10 +85,11 @@ const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             borderRadius: 2,
             p: 2,
             position: 'sticky',
-            top: 50
+            top: 50,
+            display: { xs: 'none', md: 'flex' }
           }}>
             <Resume
-              markdown={body}
+              markdown={fallbackArticle.articleBySlug.entry}
             />
           </Box>
         </Grid>

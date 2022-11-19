@@ -17,10 +17,10 @@ model Article {
   slug String
   published Boolean? @default(false) @db.TinyInt
   tagsOnArticles TagsOnArticles[]
-  imageId Int
+  imageId Int?
   createdAt DateTime @default(now()) @db.DateTime(6)
   updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
-  image Image @relation(fields: [imageId], references: [id])
+  image Image? @relation(fields: [imageId], references: [id])
   
   @@unique([slug])
 }

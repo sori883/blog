@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 
 import Box from '@mui/material/Box';
 
+import ContentStyle from 'styles/cotentStyle';
+
 type Props = {
   children: ReactNode;
 }
@@ -14,7 +16,9 @@ export default function ContentBox({children}:Props): JSX.Element {
       borderRadius: 2,
       p: 2,
     }}>
-      { children }
+      <ContentStyle>
+        { children }
+      </ContentStyle>
     </Box>
   );
 }

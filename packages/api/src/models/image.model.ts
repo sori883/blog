@@ -6,10 +6,14 @@ import { ArticleModel } from '@/models/article.model';
 export class ImageModel {
   @Field(() => ID)
     id!: number;
-  name!: string;
-  path!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
+  @Field()
+    name!: string;
+  @Field()
+    path!: string;
+  @Field()
+    createdAt!: Date;
+  @Field()
+    updatedAt!: Date;
 
   
   @Field((type) => [ArticleModel])

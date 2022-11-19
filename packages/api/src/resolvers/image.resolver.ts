@@ -31,7 +31,7 @@ export class ImageResolver {
 
   @Mutation((returns) => ImageModel)
   async updateImage(@Args('image') image: UpdateImageInput) {
-    return await this.imageService.save(image);
+    return await this.imageService.update(image);
   }
 
   @Mutation((returns) => ImageModel, { nullable: true })
