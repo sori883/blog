@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import gfm from 'remark-gfm';
 
 import { imageLoader, pathBuilder } from 'lib/ImageLoader';
+import ContentStyle from 'styles/cotentStyle';
 
 type Props = {
   markdown:  string;
@@ -77,7 +78,7 @@ const CodeBlock = ({ ...props }) => {
 
 export function View({markdown}: Props): JSX.Element {
   return (
-    <div className='articleEntry'>
+    <ContentStyle>
       <ReactMarkdown
         components={{
           h2: H2,
@@ -88,7 +89,7 @@ export function View({markdown}: Props): JSX.Element {
       >
         {markdown}
       </ReactMarkdown>
-    </div>
+    </ContentStyle>
   );
 }
 

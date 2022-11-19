@@ -45,72 +45,6 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
-const body = `
-# 第とる
-~~~js
-console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')console.log('It works!')
-~~~
-[Google](http://www.google.co.jp/)
-![犬](images/test/ss.43.jpg)
-## タイトル1
-***こんばんわ***
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-* おはよう。
-## タイトル2
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-## タイトル3
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-## タイトル2
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-## タイトル3
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-## タイトル2
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-1. こんにちは。
-2. こんにちは。
-3. こんにちは。
-## タイトル3
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは
-#### こんばんは`;
-
 const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   fallbackArticle
 }) => (
@@ -135,7 +69,7 @@ const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             />
             <Divider sx={{marginY: 2}} />
             <View
-              markdown={body}
+              markdown={fallbackArticle.articleBySlug.entry}
             />
           </ContentBox>
         </Grid>
@@ -155,7 +89,7 @@ const Article: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             display: { xs: 'none', md: 'flex' }
           }}>
             <Resume
-              markdown={body}
+              markdown={fallbackArticle.articleBySlug.entry}
             />
           </Box>
         </Grid>

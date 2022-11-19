@@ -36,6 +36,8 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
     });
   };
 
+  console.log(initialData.articleCount);
+
   return (
     <div>
       <SiteHead />

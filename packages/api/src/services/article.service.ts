@@ -8,7 +8,9 @@ export class ArticleService {
   constructor(private prisma: PrismaService) {}
 
   async getArticleCount() {
-    const count = await this.prisma.article.count();
+    const count = await this.prisma.article.count({
+      where: { published: true },
+    });
     return count;
   }
 
