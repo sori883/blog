@@ -38,6 +38,7 @@ export class ArticleService {
 
   async findAll({skip = 0, take = 25}: PaginationArtricleInput) {
     return await this.prisma.article.findMany({
+      where: { published: true },
       orderBy: { createdAt: 'desc' },
       skip: skip,
       take: take,
