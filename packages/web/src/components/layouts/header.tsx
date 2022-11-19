@@ -33,12 +33,12 @@ export default function Header() {
             <Box
               sx={{ display: { xl : 'flex', xs: 'none'} }}
             >
-              <Typography textAlign='center' variant='subtitle1' component='a' sx={{ mr: 3 }}>
+              <Typography textAlign='center' variant='subtitle1' component='p' sx={{ mr: 3 }}>
                 <Link href={pagesPath.$url()}>
                   home
                 </Link>
               </Typography>
-              <Typography textAlign='center' variant='subtitle1' component='a' sx={{ mr: 3 }}>
+              <Typography textAlign='center' variant='subtitle1' component='p' sx={{ mr: 3 }}>
                 <Link href={pagesPath.itsme.$url()}>
                   profile
                 </Link>
