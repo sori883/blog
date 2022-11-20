@@ -64,3 +64,4 @@ steps:
 
 images:
   - gcr.io/$PROJECT_ID/build:$COMMIT_SHA
+  
