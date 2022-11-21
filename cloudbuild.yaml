@@ -12,7 +12,6 @@ steps:
 
   - id: 'Migrate: database'
     name: 'gcr.io/cloud-builders/docker'
-    entrypoint: /bin/bash
     args: [
       'run',
       '-w', '/app/packages/api',
