@@ -12,10 +12,10 @@ steps:
 
   - id: 'Migrate: database'
     name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    dir: /app/packages/api'
     args: [
-      '-c',
+      'run',
+      '-w', '/app/packages/api',
+      'gcr.io/$PROJECT_ID/build:$COMMIT_SHA',
       'yarn', 'migrate:deploy'
     ]
     secretEnv: ['DATABASE_URL']
