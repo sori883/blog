@@ -16,7 +16,7 @@ steps:
     dir: /app/packages/api'
     args: [
       '-c',
-      'yarn', 'migrate:deploy --to-url $$DATABASE_URL'
+      'yarn', 'migrate:deploy'
     ]
     secretEnv: ['DATABASE_URL']
     waitFor:
