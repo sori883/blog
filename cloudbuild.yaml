@@ -15,6 +15,7 @@ steps:
     args: [
       'run',
       '-w', '/app/packages/api',
+      '-e', 'DATABASE_URL=$$DATABASE_URL',
       'gcr.io/$PROJECT_ID/build:$COMMIT_SHA',
       'yarn', 'migrate:deploy'
     ]
