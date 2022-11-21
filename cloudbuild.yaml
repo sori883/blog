@@ -15,8 +15,8 @@ steps:
     args: [
       'run',
       '-w', '/app/packages/api',
-      '-e', 'DATABASE_URL=$$DATABASE_URL',
       'gcr.io/$PROJECT_ID/build:$COMMIT_SHA',
+      '--build-arg', '$$DATABASE_URL'
       'yarn', 'migrate:deploy'
     ]
     secretEnv: ['DATABASE_URL']
