@@ -14,11 +14,9 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     dir: /app/packages/api'
-    env:
-      - DATABASE_URL=$$DATABASE_URL
     args: [
       '-c',
-      'yarn', 'migrate:deploy'
+      'yarn', 'migrate:deploy --to-url $$DATABASE_URL'
     ]
     secretEnv: ['DATABASE_URL']
     waitFor:
