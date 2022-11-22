@@ -29,9 +29,9 @@ steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args: [
-      '-c', '--image gcr.io/$PROJECT_ID/build:$COMMIT_SHA --region asia-northeast1 --platform managed --memory 512Mi --set-cloudsql-instances ${_CLOUD_SQL_CONNECTION_NAME} --allow-unauthenticated --set-env-vars TZ=Asia/Tokyo,DATABASE_URL=$$DATABASE_URL'
+      '-c', 'gcloud run deploy $_CLOUD_RUN_SERVICE_NAME --image gcr.io/$PROJECT_ID/build:$COMMIT_SHA --region asia-northeast1 --platform managed --memory 512Mi --set-cloudsql-instances ${_CLOUD_SQL_CONNECTION_NAME} --allow-unauthenticated --set-env-vars TZ=Asia/Tokyo,DATABASE_URL=$$DATABASE_URL'
     ]
-
+  secretEnv: ['DATABASE_URL']
 images:
   - gcr.io/$PROJECT_ID/build:$COMMIT_SHA
 
