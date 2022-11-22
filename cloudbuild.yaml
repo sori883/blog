@@ -30,7 +30,7 @@ steps:
     entrypoint: 'bash'
     args: [
       '-c'
-      'run', 'deploy', '$_CLOUD_RUN_SERVICE_NAME',
+      'gcloud run', 'deploy', '$_CLOUD_RUN_SERVICE_NAME',
       '--image', 'gcr.io/$PROJECT_ID/build:$COMMIT_SHA',
       '--region', 'asia-northeast1',
       '--platform', 'managed',
