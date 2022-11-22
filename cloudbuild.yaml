@@ -16,9 +16,9 @@ steps:
     args: [
       '-c', 'docker run -e DATABASE_URL=$$DATABASE_URL -w /app/packages/api gcr.io/$PROJECT_ID/build:$COMMIT_SHA yarn migrate:deploy',
     ]
+    secretEnv: ['DATABASE_URL']
     waitFor:
       - 'Build: docker image'
-
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/build:$COMMIT_SHA']
     waitFor:
